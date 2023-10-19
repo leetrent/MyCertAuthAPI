@@ -1,0 +1,1 @@
+C:\Users\Lee\Dev\Learning\ChatGPT\ClientCertificateAuth\ExternalResources>C:\Users\Lee\Dev\Tools\curl-8.4.0_3-win64-mingw\curl-8.4.0_3-win64-mingw\bin\curl.exe -k -v --cert ca.crt --key ca.key https://localhost:7008/WeatherForecast
