@@ -1,8 +1,5 @@
-using System;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
-using Microsoft.Extensions.Hosting;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MyCertAuthAPI
 {
@@ -26,11 +23,14 @@ namespace MyCertAuthAPI
                         options.ConfigureHttpsDefaults(httpsOptions =>
                         {
                             httpsOptions.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+                            httpsOptions.CheckCertificateRevocation = false; // For development.
                             httpsOptions.ClientCertificateValidation = (certificate, chain, errors) =>
                             {
-                                // This example simply checks that the certificate is signed by the trusted CA
-                                return certificate.Issuer == caCertificate.Issuer;
+                                // Validate the client's certificate.
+                                return certificate.Subject == "CN=client";
                             };
+                            // Load the server.pfx for server's SSL/TLS settings
+                            httpsOptions.ServerCertificate = new X509Certificate2(@"C:\Users\Lee\Dev\Learning\ChatGPT\ClientCertificateAuth\ExternalResources\server.pfx", "CaseyPo0h");
                         });
                     });
                 });

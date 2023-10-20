@@ -14,5 +14,9 @@ $ openssl req -x509 -newkey rsa:4096 -keyout server.key -out server.crt -days 36
 openssl req -x509 -newkey rsa:4096 -keyout client.key -out client.crt -days 365 -nodes -subj "//CN=client"
 # Similarly, this command will generate a new private key (client.key) and a self-signed certificate (client.crt) with the Common Name (CN) set to "client".
 
+# Create server.pfx from server.crt and server.key:
+$ openssl pkcs12 -export -out server.pfx -inkey server.key -in server.crt -passout pass:CaseyPo0h
+
+
 
 
