@@ -5,3 +5,14 @@ $ openssl genpkey -algorithm RSA -out ca.key
 $ openssl req -new -x509 -days 365 -key ca.key -out ca.crt
 
 
+# Generate a new set of keys and certificates for the server:
+$ openssl req -x509 -newkey rsa:4096 -keyout server.key -out server.crt -days 365 -nodes -subj "//CN=localhost"
+# This command will generate a new private key (server.key) and a self-signed certificate (server.crt) with the Common Name (CN) set to "localhost". 
+# The -days 365 flag specifies that the certificate will be valid for 365 days.
+
+# Generate a new set of keys and certificates for the client:
+openssl req -x509 -newkey rsa:4096 -keyout client.key -out client.crt -days 365 -nodes -subj "//CN=client"
+# Similarly, this command will generate a new private key (client.key) and a self-signed certificate (client.crt) with the Common Name (CN) set to "client".
+
+
+
